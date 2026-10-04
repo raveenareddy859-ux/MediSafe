@@ -1,0 +1,4740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediSafe | Smart Medical Waste Management</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
+}
+
+:root{
+    --green:#087f5b;
+    --green2:#13a879;
+    --dark:#103c34;
+    --dark2:#082c26;
+    --light:#f5faf8;
+    --white:#fff;
+    --text:#173d36;
+    --muted:#6b7d78;
+    --border:#dce9e5;
+    --yellow:#f5c542;
+    --red:#e84c3d;
+    --blue:#3285d1;
+    --shadow:0 12px 35px rgba(16,60,52,.09);
+}
+
+body{
+    background:var(--light);
+    color:var(--text);
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================================
+   PUBLIC WEBSITE
+================================ */
+
+#publicWebsite{
+    min-height:100vh;
+    background:white;
+}
+
+.public-nav{
+    height:78px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    border-bottom:1px solid #edf2f0;
+    background:#fff;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    font-size:25px;
+    font-weight:900;
+    color:var(--dark);
+}
+
+.brand-logo{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--green),var(--green2));
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.brand span{
+    color:var(--green);
+}
+
+.public-links{
+    display:flex;
+    align-items:center;
+    gap:27px;
+}
+
+.public-links a{
+    color:#49645e;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+}
+
+.public-links a:hover{
+    color:var(--green);
+}
+
+.nav-login{
+    background:var(--green);
+    color:white!important;
+    padding:11px 18px;
+    border-radius:9px;
+}
+
+.public-hero{
+    min-height:650px;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    align-items:center;
+    gap:50px;
+    padding:75px 8%;
+    background:
+        radial-gradient(circle at 90% 20%,#dff8ef 0,transparent 32%),
+        linear-gradient(180deg,#ffffff,#f3faf7);
+}
+
+.hero-label{
+    display:inline-block;
+    padding:8px 13px;
+    border-radius:30px;
+    background:#e5f7f0;
+    color:var(--green);
+    font-weight:800;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+.public-hero h1{
+    font-size:60px;
+    line-height:1.05;
+    color:var(--dark);
+    margin-bottom:22px;
+}
+
+.public-hero h1 span{
+    color:var(--green);
+}
+
+.public-hero p{
+    max-width:680px;
+    font-size:18px;
+    line-height:1.75;
+    color:var(--muted);
+}
+
+.hero-actions{
+    display:flex;
+    gap:13px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:13px 20px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-green{
+    background:var(--green);
+    color:white;
+}
+
+.btn-light{
+    background:#eaf5f1;
+    color:var(--green);
+}
+
+.btn-white{
+    background:white;
+    color:var(--green);
+}
+
+.btn-outline{
+    background:white;
+    border:1px solid var(--border);
+    color:var(--dark);
+}
+
+.hero-visual{
+    position:relative;
+}
+
+.hero-panel{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:28px;
+    padding:27px;
+    box-shadow:var(--shadow);
+}
+
+.hero-panel-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.live{
+    background:#e5f8f0;
+    color:var(--green);
+    padding:7px 11px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.bin-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
+}
+
+.bin{
+    border-radius:16px;
+    padding:22px;
+    min-height:120px;
+}
+
+.bin strong{
+    display:block;
+    margin-top:10px;
+    font-size:17px;
+}
+
+.bin small{
+    display:block;
+    margin-top:5px;
+    color:#536862;
+}
+
+.bin-yellow{
+    background:#fff5c7;
+}
+
+.bin-red{
+    background:#ffe5e1;
+}
+
+.bin-white{
+    background:#eef1f3;
+}
+
+.bin-blue{
+    background:#e0efff;
+}
+
+.public-section{
+    padding:85px 8%;
+}
+
+.public-section:nth-child(even){
+    background:#f7fbf9;
+}
+
+.section-title{
+    text-align:center;
+    max-width:750px;
+    margin:0 auto 45px;
+}
+
+.section-title span{
+    color:var(--green);
+    font-size:12px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    margin-top:10px;
+    font-size:39px;
+    color:var(--dark);
+}
+
+.section-title p{
+    margin-top:13px;
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.info-grid{
+    max-width:1150px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.info-card{
+    background:white;
+    padding:27px;
+    border-radius:18px;
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+}
+
+.info-icon{
+    width:48px;
+    height:48px;
+    border-radius:13px;
+    background:#e5f7f0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:23px;
+    margin-bottom:18px;
+}
+
+.info-card h3{
+    margin-bottom:10px;
+}
+
+.info-card p{
+    color:var(--muted);
+    line-height:1.65;
+}
+
+.challenge-box{
+    max-width:1150px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.challenge-main{
+    background:var(--dark);
+    color:white;
+    border-radius:24px;
+    padding:38px;
+}
+
+.challenge-main h3{
+    font-size:28px;
+    margin-bottom:18px;
+}
+
+.challenge-main p{
+    color:#cce2dc;
+    line-height:1.75;
+}
+
+.challenge-list{
+    display:grid;
+    gap:12px;
+}
+
+.challenge-item{
+    padding:20px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+}
+
+.challenge-item strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.challenge-item span{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.flow{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.flow-card{
+    padding:25px 18px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:16px;
+    text-align:center;
+}
+
+.flow-number{
+    width:38px;
+    height:38px;
+    background:var(--green);
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto auto 15px;
+    font-weight:900;
+}
+
+.flow-card p{
+    margin-top:7px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+}
+
+.impact-strip{
+    max-width:1100px;
+    margin:auto;
+    background:linear-gradient(135deg,var(--green),#045a43);
+    color:white;
+    border-radius:25px;
+    padding:35px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    text-align:center;
+}
+
+.impact-number{
+    font-size:34px;
+    font-weight:900;
+}
+
+.impact-label{
+    color:#d5f0e8;
+    margin-top:5px;
+    font-size:13px;
+}
+
+.public-footer{
+    background:#082c26;
+    color:white;
+    padding:40px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.public-footer p{
+    color:#a8c7bf;
+    font-size:13px;
+}
+
+
+/* ================================
+   AUTH
+================================ */
+
+#authScreen{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 10%,#d9f7ed,transparent 30%),
+        #f3faf7;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+
+.auth-box{
+    width:450px;
+    background:white;
+    padding:38px;
+    border-radius:24px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+}
+
+.auth-logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.auth-logo .brand{
+    justify-content:center;
+}
+
+.auth-box h2{
+    text-align:center;
+    margin-bottom:7px;
+}
+
+.auth-subtitle{
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:25px;
+    font-size:14px;
+}
+
+.auth-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background:#edf5f2;
+    padding:4px;
+    border-radius:10px;
+    margin-bottom:23px;
+}
+
+.auth-tab{
+    border:0;
+    padding:10px;
+    background:transparent;
+    border-radius:8px;
+    font-weight:800;
+    color:var(--muted);
+}
+
+.auth-tab.active{
+    background:white;
+    color:var(--green);
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    font-size:12px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:12px;
+    outline:none;
+    background:white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:var(--green);
+}
+
+.auth-button{
+    width:100%;
+    margin-top:5px;
+}
+
+.auth-back{
+    width:100%;
+    margin-top:10px;
+}
+
+#registerFields{
+    display:none;
+}
+
+
+/* ================================
+   APPLICATION
+================================ */
+
+#app{
+    display:none;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:265px;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    background:var(--dark2);
+    color:white;
+    padding:20px 14px;
+    overflow-y:auto;
+    z-index:50;
+}
+
+.side-brand{
+    padding:8px 12px 24px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    margin-bottom:15px;
+}
+
+.side-brand .brand{
+    color:white;
+}
+
+.side-brand .brand span{
+    color:#7be4c0;
+}
+
+.user-card{
+    padding:14px;
+    border-radius:13px;
+    background:rgba(255,255,255,.07);
+    margin-bottom:15px;
+}
+
+.user-card strong{
+    display:block;
+}
+
+.user-card small{
+    color:#a8c6bf;
+    line-height:1.7;
+}
+
+.menu-section{
+    margin:20px 8px 8px;
+    color:#6ea398;
+    font-size:10px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.menu{
+    padding:10px 12px;
+    border-radius:9px;
+    margin:3px 0;
+    cursor:pointer;
+    color:#c9ddd8;
+    font-size:13px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.menu:hover,
+.menu.active{
+    background:#18594d;
+    color:white;
+}
+
+.logout{
+    margin-top:20px;
+    background:#6f302b;
+}
+
+.main{
+    margin-left:265px;
+    min-height:100vh;
+    padding:27px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:24px;
+}
+
+.topbar h1{
+    font-size:27px;
+}
+
+.system-status{
+    background:#e4f7ef;
+    color:var(--green);
+    padding:9px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:900;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:22px;
+    box-shadow:var(--shadow);
+}
+
+.card h3{
+    margin-bottom:7px;
+}
+
+.muted{
+    color:var(--muted);
+    line-height:1.6;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:20px;
+}
+
+.stat{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:19px;
+    box-shadow:var(--shadow);
+}
+
+.stat small{
+    color:var(--muted);
+}
+
+.stat h2{
+    margin-top:9px;
+    font-size:27px;
+}
+
+.green-text{
+    color:var(--green);
+}
+
+.yellow-text{
+    color:#b27f00;
+}
+
+.blue-text{
+    color:var(--blue);
+}
+
+.red-text{
+    color:var(--red);
+}
+
+.grid-2{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:20px;
+}
+
+.grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.primary{
+    background:var(--green);
+    color:white;
+}
+
+.progress{
+    height:9px;
+    background:#edf3f1;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px 0 16px;
+}
+
+.progress-bar{
+    height:100%;
+    background:var(--green);
+}
+
+
+/* ================================
+   COLOR GUIDE
+================================ */
+
+.color-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.color-card{
+    padding:27px;
+    border-radius:19px;
+    min-height:245px;
+}
+
+.color-card h2{
+    margin-bottom:8px;
+}
+
+.color-card p{
+    color:#52645f;
+    line-height:1.5;
+}
+
+.color-card ul{
+    padding-left:20px;
+    margin-top:14px;
+    line-height:1.8;
+}
+
+.yellow-card{
+    background:#fff5c7;
+    border-left:8px solid var(--yellow);
+}
+
+.red-card{
+    background:#ffe2de;
+    border-left:8px solid var(--red);
+}
+
+.white-card{
+    background:#eef1f3;
+    border-left:8px solid #667085;
+}
+
+.blue-card{
+    background:#e0efff;
+    border-left:8px solid var(--blue);
+}
+
+
+/* ================================
+   GOOD WORK
+================================ */
+
+.upload-area{
+    border:2px dashed #b9d9ce;
+    border-radius:18px;
+    background:#f7fcfa;
+    padding:32px;
+    text-align:center;
+}
+
+.upload-area input{
+    margin-top:15px;
+}
+
+.preview{
+    display:none;
+    margin-top:20px;
+    text-align:center;
+}
+
+.preview img,
+.preview video{
+    max-width:100%;
+    max-height:320px;
+    border-radius:14px;
+}
+
+.verify-box{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+    border-radius:15px;
+    background:#f4faf7;
+    border:1px solid #cde8df;
+}
+
+.verify-title{
+    font-size:18px;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.pending{
+    color:#b57916;
+}
+
+.history-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+.history-table th,
+.history-table td{
+    border-bottom:1px solid var(--border);
+    padding:12px 8px;
+    text-align:left;
+    font-size:12px;
+}
+
+.badge{
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:900;
+}
+
+.badge-pending{
+    background:#fff2ca;
+    color:#a06d00;
+}
+
+.badge-approved{
+    background:#dff7ec;
+    color:var(--green);
+}
+
+
+/* ================================
+   REWARDS
+================================ */
+
+.points-banner{
+    background:linear-gradient(135deg,var(--green),#045f47);
+    color:white;
+    padding:27px;
+    border-radius:20px;
+    margin-bottom:20px;
+}
+
+.points-banner h2{
+    font-size:43px;
+    margin:5px 0;
+}
+
+.points-banner p{
+    color:#d5f0e8;
+}
+
+.reward-card{
+    background:white;
+    border:1px solid var(--border);
+    padding:22px;
+    border-radius:17px;
+    box-shadow:var(--shadow);
+}
+
+.reward-icon{
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.reward-card p{
+    color:var(--muted);
+    margin-top:6px;
+    line-height:1.5;
+}
+
+.reward-card button{
+    width:100%;
+    margin-top:15px;
+}
+
+
+/* ================================
+   TRACKING
+================================ */
+
+.timeline{
+    border-left:3px solid #cbe6dc;
+    margin:25px 0 0 10px;
+    padding-left:25px;
+}
+
+.timeline-item{
+    position:relative;
+    margin-bottom:27px;
+}
+
+.timeline-item:before{
+    content:"";
+    position:absolute;
+    left:-33px;
+    top:3px;
+    width:12px;
+    height:12px;
+    background:var(--green);
+    border-radius:50%;
+}
+
+.timeline-item strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.timeline-item p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+
+/* ================================
+   QUIZ
+================================ */
+
+.quiz-question{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:15px;
+}
+
+.quiz-question h4{
+    margin-bottom:12px;
+}
+
+.quiz-option{
+    display:block;
+    padding:10px;
+    background:#f6faf8;
+    border-radius:8px;
+    margin:6px 0;
+    cursor:pointer;
+}
+
+.quiz-result{
+    padding:15px;
+    border-radius:12px;
+    background:#e7f7f0;
+    color:var(--green);
+    font-weight:800;
+    margin-top:15px;
+}
+
+
+/* ================================
+   ADMIN
+================================ */
+
+.admin-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+.admin-table th,
+.admin-table td{
+    padding:13px 8px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+    font-size:12px;
+}
+
+.admin-alert{
+    padding:15px;
+    border-radius:12px;
+    background:#fff5d5;
+    margin-top:12px;
+    color:#805d00;
+}
+
+
+/* ================================
+   TOAST
+================================ */
+
+#toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    z-index:9999;
+    background:#123d35;
+    color:white;
+    padding:14px 20px;
+    border-radius:10px;
+    display:none;
+    box-shadow:var(--shadow);
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media(max-width:1000px){
+
+    .public-hero,
+    .challenge-box,
+    .grid-2{
+        grid-template-columns:1fr;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .flow{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .impact-strip{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:760px){
+
+    .public-links{
+        display:none;
+    }
+
+    .public-hero h1{
+        font-size:43px;
+    }
+
+    .info-grid,
+    .color-grid,
+    .grid-3,
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    .public-footer{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- ============================================================
+     PUBLIC WEBSITE
+============================================================ -->
+
+<div id="publicWebsite">
+
+    <nav class="public-nav">
+
+        <div class="brand">
+            <div class="brand-logo">✚</div>
+            Medi<span>Safe</span>
+        </div>
+
+        <div class="public-links">
+            <a href="#aboutUs">About Us</a>
+            <a href="#challenge">Challenge</a>
+            <a href="#solution">Solution</a>
+            <a href="#impact">Impact</a>
+
+            <a href="#" class="nav-login"
+               onclick="showAuth('login');return false;">
+                Login
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="public-hero">
+
+        <div>
+
+            <div class="hero-label">
+                SMART MEDICAL-WASTE MANAGEMENT
+            </div>
+
+            <h1>
+                Right Bin.<br>
+                <span>Right Time.</span><br>
+                Zero Guesswork.
+            </h1>
+
+            <p>
+                MediSafe brings medical-waste segregation,
+                tracking, collection, staff engagement and
+                facility insights into one simple digital platform.
+            </p>
+
+            <div class="hero-actions">
+
+                <button class="btn btn-green"
+                        onclick="showAuth('register')">
+                    Create Account
+                </button>
+
+                <button class="btn btn-light"
+                        onclick="document.getElementById('aboutUs').scrollIntoView({behavior:'smooth'})">
+                    Explore MediSafe
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="hero-panel">
+
+                <div class="hero-panel-top">
+
+                    <div>
+                        <strong>4-Color Segregation</strong>
+                        <br>
+                        <small style="color:#71817c">
+                            Simple at the point of disposal
+                        </small>
+                    </div>
+
+                    <div class="live">
+                        ● SMART
+                    </div>
+
+                </div>
+
+
+                <div class="bin-grid">
+
+                    <div class="bin bin-yellow">
+                        🟡
+                        <strong>Yellow</strong>
+                        <small>Soiled & applicable waste</small>
+                    </div>
+
+                    <div class="bin bin-red">
+                        🔴
+                        <strong>Red</strong>
+                        <small>Contaminated plastics</small>
+                    </div>
+
+                    <div class="bin bin-white">
+                        ⚪
+                        <strong>White</strong>
+                        <small>Sharps</small>
+                    </div>
+
+                    <div class="bin bin-blue">
+                        🔵
+                        <strong>Blue</strong>
+                        <small>Glass & implants</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT US -->
+
+    <section class="public-section" id="aboutUs">
+
+        <div class="section-title">
+
+            <span>ABOUT US</span>
+
+            <h2>Making Medical Waste Management Simple</h2>
+
+            <p>
+                MediSafe is designed to connect healthcare staff,
+                waste collectors and administrators through one
+                easy-to-understand digital workflow.
+            </p>
+
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="info-card">
+
+                <div class="info-icon">🏥</div>
+
+                <h3>For Healthcare Facilities</h3>
+
+                <p>
+                    Record waste, monitor segregation,
+                    generate reports and manage collection
+                    activities from one place.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">👨‍⚕️</div>
+
+                <h3>For Staff</h3>
+
+                <p>
+                    Get simple waste-category guidance,
+                    complete quizzes and receive recognition
+                    for responsible segregation.
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="info-icon">🚛</div>
+
+                <h3>For Collectors</h3>
+
+                <p>
+                    Manage pickup requests and use QR/barcode
+                    identification for better traceability.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CHALLENGE -->
+
+    <section class="public-section" id="challenge">
+
+        <div class="section-title">
+
+            <span>THE CHALLENGE</span>
+
+            <h2>Medical Waste Needs Better Visibility</h2>
+
+            <p>
+                Hospitals generate different categories of
+                biomedical waste every day. MediSafe focuses
+                on making the workflow clear and trackable.
+            </p>
+
+        </div>
+
+
+        <div class="challenge-box">
+
+            <div class="challenge-main">
+
+                <h3>
+                    What happens without a connected system?
+                </h3>
+
+                <p>
+                    Manual records, incorrect segregation,
+                    delayed pickup information and limited
+                    staff feedback can make waste management
+                    harder to monitor.
+                </p>
+
+            </div>
+
+
+            <div class="challenge-list">
+
+                <div class="challenge-item">
+                    <strong>♻️ Segregation</strong>
+                    <span>
+                        Different waste categories can be mixed
+                        if guidance is unclear.
+                    </span>
+                </div>
+
+                <div class="challenge-item">
+                    <strong>📋 Records</strong>
+                    <span>
+                        Paper-based records provide limited
+                        real-time visibility.
+                    </span>
+                </div>
+
+                <div class="challenge-item">
+                    <strong>🚛 Collection</strong>
+                    <span>
+                        Pickup status can be difficult to follow
+                        across departments.
+                    </span>
+                </div>
+
+                <div class="challenge-item">
+                    <strong>👥 Staff Engagement</strong>
+                    <span>
+                        Good segregation practices need continuous
+                        training and recognition.
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SOLUTION -->
+
+    <section class="public-section" id="solution">
+
+        <div class="section-title">
+
+            <span>OUR SOLUTION</span>
+
+            <h2>One Digital Workflow</h2>
+
+            <p>
+                MediSafe connects segregation, recording,
+                tracking, collection and reporting.
+            </p>
+
+        </div>
+
+
+        <div class="flow">
+
+            <div class="flow-card">
+
+                <div class="flow-number">1</div>
+
+                <h3>Segregate</h3>
+
+                <p>
+                    Identify the correct color category
+                    at the point of disposal.
+                </p>
+
+            </div>
+
+            <div class="flow-card">
+
+                <div class="flow-number">2</div>
+
+                <h3>Record</h3>
+
+                <p>
+                    Enter facility and daily waste details.
+                </p>
+
+            </div>
+
+            <div class="flow-card">
+
+                <div class="flow-number">3</div>
+
+                <h3>Track</h3>
+
+                <p>
+                    Use QR/barcode workflows for collection
+                    visibility.
+                </p>
+
+            </div>
+
+            <div class="flow-card">
+
+                <div class="flow-number">4</div>
+
+                <h3>Improve</h3>
+
+                <p>
+                    Use reports, training and staff rewards
+                    to improve performance.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- IMPACT -->
+
+    <section class="public-section" id="impact">
+
+        <div class="section-title">
+
+            <span>IMPACT</span>
+
+            <h2>Designed for Public Good</h2>
+
+            <p>
+                MediSafe can be adapted to different healthcare
+                facilities, countries, languages and local
+                biomedical-waste requirements.
+            </p>
+
+        </div>
+
+
+        <div class="impact-strip">
+
+            <div>
+                <div class="impact-number">4</div>
+                <div class="impact-label">
+                    Core Waste Categories
+                </div>
+            </div>
+
+            <div>
+                <div class="impact-number">3</div>
+                <div class="impact-label">
+                    Main User Roles
+                </div>
+            </div>
+
+            <div>
+                <div class="impact-number">24/7</div>
+                <div class="impact-label">
+                    Digital Visibility
+                </div>
+            </div>
+
+            <div>
+                <div class="impact-number">1</div>
+                <div class="impact-label">
+                    Connected Platform
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer class="public-footer">
+
+        <div class="brand">
+            <div class="brand-logo">✚</div>
+            Medi<span>Safe</span>
+        </div>
+
+        <p>
+            Right Bin. Right Time. Zero Guesswork.
+        </p>
+
+    </footer>
+
+</div>
+
+
+<!-- ============================================================
+     LOGIN / CREATE ACCOUNT
+============================================================ -->
+
+<div id="authScreen">
+
+    <div class="auth-box">
+
+        <div class="auth-logo">
+
+            <div class="brand">
+                <div class="brand-logo">✚</div>
+                Medi<span>Safe</span>
+            </div>
+
+        </div>
+
+        <h2 id="authTitle">
+            Welcome Back
+        </h2>
+
+        <p class="auth-subtitle"
+           id="authSubtitle">
+            Login to your MediSafe account
+        </p>
+
+
+        <div class="auth-tabs">
+
+            <button class="auth-tab active"
+                    id="loginTab"
+                    onclick="switchAuth('login')">
+                Login
+            </button>
+
+            <button class="auth-tab"
+                    id="registerTab"
+                    onclick="switchAuth('register')">
+                Create Account
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <div id="loginFields">
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input id="loginEmail"
+                       type="email"
+                       placeholder="Enter email">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input id="loginPassword"
+                       type="password"
+                       placeholder="Enter password">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Role</label>
+
+                <select id="loginRole">
+
+                    <option value="Staff">
+                        Hospital Staff
+                    </option>
+
+                    <option value="Collector">
+                        Waste Collector
+                    </option>
+
+                    <option value="Admin">
+                        Administrator
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button class="btn btn-green auth-button"
+                    onclick="loginUser()">
+                Login to MediSafe
+            </button>
+
+        </div>
+
+
+        <!-- REGISTER -->
+
+        <div id="registerFields">
+
+            <div class="form-group">
+
+                <label>Full Name</label>
+
+                <input id="registerName"
+                       placeholder="Enter full name">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input id="registerEmail"
+                       type="email"
+                       placeholder="Enter email">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Facility Name</label>
+
+                <input id="registerFacility"
+                       placeholder="Hospital / Clinic">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Role</label>
+
+                <select id="registerRole">
+
+                    <option value="Staff">
+                        Hospital Staff
+                    </option>
+
+                    <option value="Collector">
+                        Waste Collector
+                    </option>
+
+                    <option value="Admin">
+                        Administrator
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input id="registerPassword"
+                       type="password"
+                       placeholder="Create password">
+
+            </div>
+
+
+            <button class="btn btn-green auth-button"
+                    onclick="createAccount()">
+                Create MediSafe Account
+            </button>
+
+        </div>
+
+
+        <button class="btn btn-light auth-back"
+                onclick="backToPublic()">
+            ← Back to Website
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     MAIN APPLICATION
+============================================================ -->
+
+<div id="app">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="side-brand">
+
+            <div class="brand">
+
+                <div class="brand-logo">
+                    ✚
+                </div>
+
+                Medi<span>Safe</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="user-card">
+
+            <strong id="userName">
+                User
+            </strong>
+
+            <small id="userEmail">
+                user@example.com
+            </small>
+
+            <br>
+
+            <small id="userFacility">
+                Facility
+            </small>
+
+            <br>
+
+            <small id="userRole">
+                Staff
+            </small>
+
+        </div>
+
+
+        <!-- MAIN -->
+
+        <div class="menu-section">
+            Main
+        </div>
+
+        <div class="menu active"
+             onclick="openPage('dashboard',this)">
+            🏠 Dashboard
+        </div>
+
+        <div class="menu"
+             onclick="openPage('facility',this)">
+            🏥 Facility Details
+        </div>
+
+        <div class="menu"
+             onclick="openPage('aboutApp',this)">
+            ℹ️ About
+        </div>
+
+
+        <!-- SEGREGATION -->
+
+        <div class="menu-section">
+            Segregation
+        </div>
+
+        <div class="menu"
+             onclick="openPage('wasteEntry',this)">
+            ♻️ Waste Entry
+        </div>
+
+        <div class="menu"
+             onclick="openPage('report',this)">
+            📊 Generated Report
+        </div>
+
+        <div class="menu"
+             onclick="openPage('colorGuide',this)">
+            🗑️ 4-Color Guide
+        </div>
+
+        <div class="menu"
+             onclick="openPage('aiCheck',this)">
+            🤖 AI Waste Check
+        </div>
+
+        <div class="menu"
+             onclick="openPage('goodWork',this)">
+            📸 Good Work
+        </div>
+
+        <div class="menu"
+             onclick="openPage('quiz',this)">
+            🧠 Waste Quiz
+        </div>
+
+        <div class="menu"
+             onclick="openPage('rewards',this)">
+            🏆 Rewards
+        </div>
+
+
+        <!-- TRACKING -->
+
+        <div class="menu-section">
+            Tracking
+        </div>
+
+        <div class="menu"
+             onclick="openPage('summary',this)">
+            📊 Waste Summary
+        </div>
+
+        <div class="menu"
+             onclick="openPage('pickup',this)">
+            🚛 Pickup / GPS
+        </div>
+
+        <div class="menu"
+             onclick="openPage('barcode',this)">
+            🔳 Barcode / QR
+        </div>
+
+
+        <!-- MANAGEMENT -->
+
+        <div class="menu-section">
+            Management
+        </div>
+
+        <div class="menu"
+             onclick="openPage('admin',this)">
+            📋 Admin
+        </div>
+
+        <div class="menu"
+             onclick="openPage('safety',this)">
+            🎓 Staff Safety
+        </div>
+
+        <div class="menu"
+             onclick="openPage('partners',this)">
+            🤝 Medical Partners
+        </div>
+
+
+        <div class="menu logout"
+             onclick="logout()">
+            🚪 Logout
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <h1 id="pageTitle">
+                Dashboard
+            </h1>
+
+            <div class="system-status">
+                ● MediSafe Active
+            </div>
+
+        </div>
+
+
+        <!-- ====================================================
+             DASHBOARD
+        ==================================================== -->
+
+        <section id="dashboard"
+                 class="page active">
+
+            <div class="stats">
+
+                <div class="stat">
+                    <small>Total Waste</small>
+                    <h2 id="dashboardTotal">
+                        0 kg
+                    </h2>
+                </div>
+
+                <div class="stat">
+                    <small>Segregation Score</small>
+                    <h2 class="green-text"
+                        id="dashboardScore">
+                        0%
+                    </h2>
+                </div>
+
+                <div class="stat">
+                    <small>Pending Bags</small>
+                    <h2 class="yellow-text"
+                        id="dashboardBags">
+                        0
+                    </h2>
+                </div>
+
+                <div class="stat">
+                    <small>MediSafe Points</small>
+                    <h2 class="blue-text"
+                        id="dashboardPoints">
+                        0
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="grid-2">
+
+                <div class="card">
+
+                    <h3>
+                        Today's Waste
+                    </h3>
+
+                    <p class="muted">
+                        Based on the information entered by
+                        your facility.
+                    </p>
+
+                    <br>
+
+                    🟡 Yellow:
+                    <strong id="yellowDisplay">
+                        0 kg
+                    </strong>
+
+                    <div class="progress">
+                        <div class="progress-bar"
+                             id="yellowBar"
+                             style="width:0%">
+                        </div>
+                    </div>
+
+
+                    🔴 Red:
+                    <strong id="redDisplay">
+                        0 kg
+                    </strong>
+
+                    <div class="progress">
+                        <div class="progress-bar"
+                             id="redBar"
+                             style="width:0%">
+                        </div>
+                    </div>
+
+
+                    ⚪ White:
+                    <strong id="whiteDisplay">
+                        0 kg
+                    </strong>
+
+                    <div class="progress">
+                        <div class="progress-bar"
+                             id="whiteBar"
+                             style="width:0%">
+                        </div>
+                    </div>
+
+
+                    🔵 Blue:
+                    <strong id="blueDisplay">
+                        0 kg
+                    </strong>
+
+                    <div class="progress">
+                        <div class="progress-bar"
+                             id="blueBar"
+                             style="width:0%">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        MediSafe Recommendation
+                    </h3>
+
+                    <p class="muted"
+                       id="dashboardRecommendation">
+                        Enter daily waste data to generate
+                        facility-specific information.
+                    </p>
+
+                    <br>
+
+                    <button class="btn btn-green"
+                            onclick="openPageById('wasteEntry')">
+                        Enter Waste Data
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             FACILITY
+        ==================================================== -->
+
+        <section id="facility"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    Facility Details
+                </h3>
+
+                <p class="muted">
+                    Enter your healthcare facility information.
+                </p>
+
+                <br>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Facility Name</label>
+
+                        <input id="facilityName"
+                               placeholder="Hospital / Clinic">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Facility Type</label>
+
+                        <select id="facilityType">
+
+                            <option>Hospital</option>
+                            <option>Clinic</option>
+                            <option>Laboratory</option>
+                            <option>Medical College</option>
+                            <option>Diagnostic Centre</option>
+                            <option>Other</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>City</label>
+
+                        <input id="facilityCity"
+                               placeholder="City">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Country</label>
+
+                        <input id="facilityCountry"
+                               placeholder="Country">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Staff Count</label>
+
+                        <input id="facilityStaff"
+                               type="number"
+                               placeholder="Example: 100">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Daily Patient Count</label>
+
+                        <input id="facilityPatients"
+                               type="number"
+                               placeholder="Example: 250">
+
+                    </div>
+
+                    <div class="full">
+
+                        <button class="btn btn-green"
+                                onclick="saveFacility()">
+                            Save Facility Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             ABOUT APP
+        ==================================================== -->
+
+        <section id="aboutApp"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    About MediSafe
+                </h3>
+
+                <br>
+
+                <p class="muted">
+                    MediSafe is a smart medical-waste management
+                    platform designed to make segregation,
+                    tracking, collection and staff engagement
+                    easier.
+                </p>
+
+                <br>
+
+                <h3>
+                    Our Principle
+                </h3>
+
+                <br>
+
+                <h2 style="color:var(--green)">
+                    Right Bin. Right Time. Zero Guesswork.
+                </h2>
+
+                <br>
+
+                <p class="muted">
+                    MediSafe can be adapted to different
+                    healthcare environments and local
+                    biomedical-waste requirements.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             WASTE ENTRY
+        ==================================================== -->
+
+        <section id="wasteEntry"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    ♻️ Daily Waste Entry
+                </h3>
+
+                <p class="muted">
+                    Enter today's approximate waste quantities.
+                </p>
+
+                <br>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            🟡 Yellow Waste (kg)
+                        </label>
+
+                        <input id="yellowKg"
+                               type="number"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            🔴 Red Waste (kg)
+                        </label>
+
+                        <input id="redKg"
+                               type="number"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            ⚪ White Sharps (kg)
+                        </label>
+
+                        <input id="whiteKg"
+                               type="number"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            🔵 Blue Waste (kg)
+                        </label>
+
+                        <input id="blueKg"
+                               type="number"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Number of Bags
+                        </label>
+
+                        <input id="bagCount"
+                               type="number"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Storage Hours
+                        </label>
+
+                        <input id="storageHours"
+                               type="number"
+                               min="0"
+                               value="0">
+
+                    </div>
+
+                    <div class="full">
+
+                        <button class="btn btn-green"
+                                onclick="generateAnalysis()">
+                            Generate Analysis
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             GENERATED REPORT
+        ==================================================== -->
+
+        <section id="report"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    📊 Generated Report
+                </h3>
+
+                <p class="muted">
+                    Generated using the data entered into MediSafe.
+                </p>
+
+                <br>
+
+                <div id="reportContent">
+
+                    <p class="muted">
+                        No report generated yet.
+                    </p>
+
+                </div>
+
+                <br>
+
+                <button class="btn btn-green"
+                        onclick="window.print()">
+                    Print / Save Report
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             4 COLOR GUIDE
+        ==================================================== -->
+
+        <section id="colorGuide"
+                 class="page">
+
+            <div class="color-grid">
+
+                <div class="color-card yellow-card">
+
+                    <h2>🟡 Yellow</h2>
+
+                    <p>
+                        Mainly applicable anatomical, soiled,
+                        pharmaceutical and specified laboratory
+                        waste.
+                    </p>
+
+                    <ul>
+                        <li>Anatomical waste</li>
+                        <li>Blood-stained cotton</li>
+                        <li>Dressings and bandages</li>
+                        <li>Applicable expired medicines</li>
+                        <li>Specified laboratory waste</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="color-card red-card">
+
+                    <h2>🔴 Red</h2>
+
+                    <p>
+                        Contaminated recyclable plastic waste.
+                    </p>
+
+                    <ul>
+                        <li>IV sets</li>
+                        <li>Tubing</li>
+                        <li>Catheters</li>
+                        <li>Urine bags</li>
+                        <li>Plastic gloves</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="color-card white-card">
+
+                    <h2>⚪ White</h2>
+
+                    <p>
+                        Sharps requiring puncture-resistant
+                        containers.
+                    </p>
+
+                    <ul>
+                        <li>Needles</li>
+                        <li>Fixed-needle syringes</li>
+                        <li>Scalpels</li>
+                        <li>Blades</li>
+                        <li>Metal sharps</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="color-card blue-card">
+
+                    <h2>🔵 Blue</h2>
+
+                    <p>
+                        Glassware and specified metallic implants.
+                    </p>
+
+                    <ul>
+                        <li>Glass vials</li>
+                        <li>Ampoules</li>
+                        <li>Broken glass</li>
+                        <li>Unbroken glassware</li>
+                        <li>Metallic implants</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="card">
+
+                <h3>
+                    Important Segregation Rules
+                </h3>
+
+                <br>
+
+                <p class="muted">
+                    <strong>Never mix:</strong>
+                    Keep waste categories separated at source.
+                </p>
+
+                <br>
+
+                <p class="muted">
+                    <strong>Track:</strong>
+                    Use appropriate barcode/QR identification
+                    according to facility procedures.
+                </p>
+
+                <br>
+
+                <p class="muted">
+                    <strong>Protect staff:</strong>
+                    Follow approved PPE and handling procedures.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             AI WASTE CHECK
+        ==================================================== -->
+
+        <section id="aiCheck"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    🤖 AI Waste Check
+                </h3>
+
+                <p class="muted">
+                    Upload an image of a waste item for an
+                    AI-assisted category suggestion.
+                </p>
+
+                <br>
+
+                <div class="upload-area">
+
+                    <strong>
+                        📷 Upload Waste Image
+                    </strong>
+
+                    <br>
+
+                    <small>
+                        Needle, glove, vial, bandage, tubing etc.
+                    </small>
+
+                    <br><br>
+
+                    <input id="aiImage"
+                           type="file"
+                           accept="image/*">
+
+                </div>
+
+                <br>
+
+                <button class="btn btn-green"
+                        onclick="checkWasteAI()">
+                    Check Waste
+                </button>
+
+                <div id="aiResult"
+                     class="verify-box">
+                </div>
+
+                <br>
+
+                <small class="muted">
+                    Prototype AI assistance only. Final
+                    segregation should follow applicable rules
+                    and hospital SOPs.
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             GOOD WORK
+        ==================================================== -->
+
+        <section id="goodWork"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    📸 Good Work Recognition
+                </h3>
+
+                <p class="muted">
+                    Upload a photo or video showing correct
+                    segregation. The submission can be reviewed
+                    before points are approved.
+                </p>
+
+                <br>
+
+                <div class="upload-area">
+
+                    <strong>
+                        Upload Photo / Video
+                    </strong>
+
+                    <br>
+
+                    <small>
+                        Maximum demo file size: 50 MB
+                    </small>
+
+                    <br>
+
+                    <input id="goodWorkFile"
+                           type="file"
+                           accept="image/*,video/*"
+                           onchange="previewGoodWork()">
+
+                </div>
+
+
+                <div id="goodPreview"
+                     class="preview">
+                </div>
+
+
+                <br>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Staff Name
+                        </label>
+
+                        <input id="goodStaffName"
+                               placeholder="Enter name">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Waste Category
+                        </label>
+
+                        <select id="goodCategory">
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option value="Yellow">
+                                🟡 Yellow
+                            </option>
+
+                            <option value="Red">
+                                🔴 Red
+                            </option>
+
+                            <option value="White">
+                                ⚪ White
+                            </option>
+
+                            <option value="Blue">
+                                🔵 Blue
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Describe the Good Work
+                        </label>
+
+                        <textarea id="goodDescription"
+                                  rows="4"
+                                  placeholder="Example: I segregated used gloves into the appropriate red container.">
+                        </textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button class="btn btn-green"
+                        onclick="submitGoodWork()">
+                    Submit for Verification
+                </button>
+
+
+                <div id="goodVerification"
+                     class="verify-box">
+
+                    <div class="verify-title pending"
+                         id="goodStatus">
+                    </div>
+
+                    <p class="muted"
+                       id="goodMessage">
+                    </p>
+
+                    <br>
+
+                    <strong id="goodReward">
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <br>
+
+
+            <div class="card">
+
+                <h3>
+                    Submission History
+                </h3>
+
+                <div style="overflow-x:auto">
+
+                    <table class="history-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Points</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="historyBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             QUIZ
+        ==================================================== -->
+
+        <section id="quiz"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    🧠 MediSafe Waste Quiz
+                </h3>
+
+                <p class="muted">
+                    Test your knowledge of the four-color
+                    segregation system.
+                </p>
+
+                <br>
+
+
+                <div class="quiz-question">
+
+                    <h4>
+                        1. Which category is mainly used for sharps?
+                    </h4>
+
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q1"
+                               value="White">
+                        White
+                    </label>
+
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q1"
+                               value="Red">
+                        Red
+                    </label>
+
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q1"
+                               value="Blue">
+                        Blue
+                    </label>
+
+                </div>
+
+
+                <div class="quiz-question">
+
+                    <h4>
+                        2. Which category is associated with
+                        glassware?
+                    </h4>
+
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q2"
+                               value="Blue">
+                        Blue
+                    </label>
+
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q2"
+                               value="Yellow">
+                        Yellow
+                    </label>
+
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q2"
+                               value="White">
+                        White
+                    </label>
+
+                </div>
+
+
+                <div class="quiz-question">
+
+                    <h4>
+                        3. Contaminated recyclable plastic generally
+                        belongs to which category?
+                    </h4>
+
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q3"
+                               value="Red">
+                        Red
+                    </label>
+
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q3"
+                               value="Blue">
+                        Blue
+                    </label>
+
+                    <label class="quiz-option">
+                        <input type="radio"
+                               name="q3"
+                               value="White">
+                        White
+                    </label>
+
+                </div>
+
+
+                <button class="btn btn-green"
+                        onclick="submitQuiz()">
+                    Submit Quiz
+                </button>
+
+
+                <div id="quizResult"
+                     class="quiz-result hidden">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             REWARDS
+        ==================================================== -->
+
+        <section id="rewards"
+                 class="page">
+
+            <div class="points-banner">
+
+                <small>
+                    Your MediSafe Points
+                </small>
+
+                <h2 id="rewardPoints">
+                    0
+                </h2>
+
+                <p>
+                    Points can be earned through approved
+                    Good Work submissions and learning activities.
+                </p>
+
+            </div>
+
+
+            <div class="grid-3">
+
+                <div class="reward-card">
+
+                    <div class="reward-icon">
+                        ☕
+                    </div>
+
+                    <h3>
+                        ₹50 Canteen Coupon
+                    </h3>
+
+                    <p>
+                        Requires 100 points.
+                    </p>
+
+                    <button class="btn btn-green"
+                            onclick="redeem(100,'₹50 Canteen Coupon')">
+                        Redeem
+                    </button>
+
+                </div>
+
+
+                <div class="reward-card">
+
+                    <div class="reward-icon">
+                        🎁
+                    </div>
+
+                    <h3>
+                        ₹100 Cafeteria Coupon
+                    </h3>
+
+                    <p>
+                        Requires 200 points.
+                    </p>
+
+                    <button class="btn btn-green"
+                            onclick="redeem(200,'₹100 Cafeteria Coupon')">
+                        Redeem
+                    </button>
+
+                </div>
+
+
+                <div class="reward-card">
+
+                    <div class="reward-icon">
+                        ⭐
+                    </div>
+
+                    <h3>
+                        Safety Star Badge
+                    </h3>
+
+                    <p>
+                        Requires 300 points.
+                    </p>
+
+                    <button class="btn btn-green"
+                            onclick="redeem(300,'Safety Star Badge')">
+                        Unlock
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             WASTE SUMMARY
+        ==================================================== -->
+
+        <section id="summary"
+                 class="page">
+
+            <div class="stats">
+
+                <div class="stat">
+                    <small>Today</small>
+                    <h2 id="summaryToday">
+                        0 kg
+                    </h2>
+                </div>
+
+                <div class="stat">
+                    <small>Yesterday</small>
+                    <h2>
+                        0 kg
+                    </h2>
+                </div>
+
+                <div class="stat">
+                    <small>Weekly Estimate</small>
+                    <h2 id="summaryWeek">
+                        0 kg
+                    </h2>
+                </div>
+
+                <div class="stat">
+                    <small>Next Day Estimate</small>
+                    <h2 id="summaryNext">
+                        0 kg
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    Waste Distribution
+                </h3>
+
+                <br>
+
+                <p>
+                    🟡 Yellow:
+                    <strong id="sumYellow">0 kg</strong>
+                </p>
+
+                <p>
+                    🔴 Red:
+                    <strong id="sumRed">0 kg</strong>
+                </p>
+
+                <p>
+                    ⚪ White:
+                    <strong id="sumWhite">0 kg</strong>
+                </p>
+
+                <p>
+                    🔵 Blue:
+                    <strong id="sumBlue">0 kg</strong>
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             PICKUP / GPS
+        ==================================================== -->
+
+        <section id="pickup"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    🚛 Pickup / GPS
+                </h3>
+
+                <p class="muted">
+                    Create a collection request for your facility.
+                </p>
+
+                <br>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Department / Location
+                        </label>
+
+                        <input id="pickupLocation"
+                               placeholder="Example: ICU Block A">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Number of Bags
+                        </label>
+
+                        <input id="pickupBags"
+                               type="number"
+                               value="1"
+                               min="1">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Priority
+                        </label>
+
+                        <select id="pickupPriority">
+
+                            <option>Normal</option>
+                            <option>High</option>
+                            <option>Urgent</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <button class="btn btn-green"
+                        onclick="requestPickup()">
+                    Request Pickup
+                </button>
+
+            </div>
+
+
+            <br>
+
+
+            <div class="card">
+
+                <h3>
+                    Collection Timeline
+                </h3>
+
+                <div class="timeline">
+
+                    <div class="timeline-item">
+
+                        <strong>
+                            Waste Segregated
+                        </strong>
+
+                        <p>
+                            Waste recorded at source.
+                        </p>
+
+                    </div>
+
+                    <div class="timeline-item">
+
+                        <strong>
+                            Pickup Requested
+                        </strong>
+
+                        <p id="pickupStatus">
+                            No pickup request yet.
+                        </p>
+
+                    </div>
+
+                    <div class="timeline-item">
+
+                        <strong>
+                            Collector Assigned
+                        </strong>
+
+                        <p>
+                            Awaiting collection assignment.
+                        </p>
+
+                    </div>
+
+                    <div class="timeline-item">
+
+                        <strong>
+                            Collection Completed
+                        </strong>
+
+                        <p>
+                            Status will update after handover.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             BARCODE
+        ==================================================== -->
+
+        <section id="barcode"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    🔳 Barcode / QR Tracking
+                </h3>
+
+                <p class="muted">
+                    Enter a bag ID to view its demo tracking record.
+                </p>
+
+                <br>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Bag / QR ID
+                        </label>
+
+                        <input id="qrBagId"
+                               placeholder="MS-BAG-1001">
+
+                    </div>
+
+                    <div style="display:flex;align-items:end">
+
+                        <button class="btn btn-green"
+                                onclick="trackBag()">
+                            Track Bag
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <div id="qrResult">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             ADMIN
+        ==================================================== -->
+
+        <section id="admin"
+                 class="page">
+
+            <div class="stats">
+
+                <div class="stat">
+                    <small>Total Waste</small>
+                    <h2 id="adminWaste">
+                        0 kg
+                    </h2>
+                </div>
+
+                <div class="stat">
+                    <small>Active Bags</small>
+                    <h2 id="adminBags">
+                        0
+                    </h2>
+                </div>
+
+                <div class="stat">
+                    <small>Pickup Requests</small>
+                    <h2 id="adminPickups">
+                        0
+                    </h2>
+                </div>
+
+                <div class="stat">
+                    <small>Staff Points</small>
+                    <h2 id="adminPoints">
+                        0
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    Facility Management
+                </h3>
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Department</th>
+                            <th>Waste</th>
+                            <th>Status</th>
+                            <th>Pickup</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>General Ward</td>
+                            <td id="adminTableWaste">
+                                0 kg
+                            </td>
+                            <td>
+                                <span class="badge badge-approved">
+                                    Active
+                                </span>
+                            </td>
+                            <td>
+                                Monitoring
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>ICU</td>
+                            <td>
+                                Monitoring
+                            </td>
+                            <td>
+                                <span class="badge badge-approved">
+                                    Active
+                                </span>
+                            </td>
+                            <td>
+                                Scheduled
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+                <div class="admin-alert">
+
+                    ⚠️ Admin reminder:
+                    Review waste records, pickup status and
+                    staff training according to your facility SOP.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             SAFETY
+        ==================================================== -->
+
+        <section id="safety"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    🎓 Staff Safety & Training
+                </h3>
+
+                <br>
+
+                <p class="muted">
+                    ✔ Follow the facility's approved biomedical
+                    waste SOP.
+                </p>
+
+                <br>
+
+                <p class="muted">
+                    ✔ Use appropriate PPE for assigned work.
+                </p>
+
+                <br>
+
+                <p class="muted">
+                    ✔ Segregate waste at the point of generation.
+                </p>
+
+                <br>
+
+                <p class="muted">
+                    ✔ Never manually handle sharps or unknown
+                    waste outside approved procedures.
+                </p>
+
+                <br>
+
+                <p class="muted">
+                    ✔ Complete required staff training and
+                    occupational safety programs.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+             MEDICAL PARTNERS
+        ==================================================== -->
+
+        <section id="partners"
+                 class="page">
+
+            <div class="card">
+
+                <h3>
+                    🤝 Medical Partners
+                </h3>
+
+                <p class="muted">
+                    Medical companies can collaborate with
+                    healthcare facilities through MediSafe.
+                </p>
+
+                <br>
+
+                <div class="grid-3">
+
+                    <div class="reward-card">
+
+                        <div class="reward-icon">
+                            📡
+                        </div>
+
+                        <h3>
+                            Smart Bin Sensors
+                        </h3>
+
+                        <p>
+                            Technology for fill-level monitoring.
+                        </p>
+
+                        <button class="btn btn-green"
+                                onclick="partner('Smart Bin Sensors')">
+                            Enquire
+                        </button>
+
+                    </div>
+
+
+                    <div class="reward-card">
+
+                        <div class="reward-icon">
+                            🥽
+                        </div>
+
+                        <h3>
+                            PPE Solutions
+                        </h3>
+
+                        <p>
+                            Healthcare safety and protection products.
+                        </p>
+
+                        <button class="btn btn-green"
+                                onclick="partner('PPE Solutions')">
+                            Enquire
+                        </button>
+
+                    </div>
+
+
+                    <div class="reward-card">
+
+                        <div class="reward-icon">
+                            🔳
+                        </div>
+
+                        <h3>
+                            QR & Barcode
+                        </h3>
+
+                        <p>
+                            Identification and tracking solutions.
+                        </p>
+
+                        <button class="btn btn-green"
+                                onclick="partner('QR and Barcode')">
+                            Enquire
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<div id="toast"></div>
+
+
+<script>
+
+/* ============================================================
+   GLOBAL STATE
+============================================================ */
+
+let currentUser = {
+    name:"",
+    email:"",
+    facility:"",
+    role:"Staff"
+};
+
+let points = 0;
+
+let waste = {
+    yellow:0,
+    red:0,
+    white:0,
+    blue:0,
+    bags:0,
+    storage:0
+};
+
+let pickupCount = 0;
+
+let submissions = [];
+
+
+/* ============================================================
+   PUBLIC -> AUTH
+============================================================ */
+
+function showAuth(mode){
+
+    document.getElementById("publicWebsite")
+        .style.display="none";
+
+    document.getElementById("authScreen")
+        .style.display="flex";
+
+    switchAuth(mode);
+}
+
+
+function switchAuth(mode){
+
+    const loginFields=
+        document.getElementById("loginFields");
+
+    const registerFields=
+        document.getElementById("registerFields");
+
+    const loginTab=
+        document.getElementById("loginTab");
+
+    const registerTab=
+        document.getElementById("registerTab");
+
+    const title=
+        document.getElementById("authTitle");
+
+    const subtitle=
+        document.getElementById("authSubtitle");
+
+
+    if(mode==="register"){
+
+        loginFields.style.display="none";
+
+        registerFields.style.display="block";
+
+        loginTab.classList.remove("active");
+
+        registerTab.classList.add("active");
+
+        title.textContent="Create Your Account";
+
+        subtitle.textContent=
+            "Join the MediSafe smart waste-management platform.";
+
+    }else{
+
+        loginFields.style.display="block";
+
+        registerFields.style.display="none";
+
+        loginTab.classList.add("active");
+
+        registerTab.classList.remove("active");
+
+        title.textContent="Welcome Back";
+
+        subtitle.textContent=
+            "Login to your MediSafe account.";
+    }
+
+}
+
+
+function backToPublic(){
+
+    document.getElementById("authScreen")
+        .style.display="none";
+
+    document.getElementById("publicWebsite")
+        .style.display="block";
+}
+
+
+/* ============================================================
+   ACCOUNT
+============================================================ */
+
+function createAccount(){
+
+    const name=
+        document.getElementById("registerName")
+        .value.trim();
+
+    const email=
+        document.getElementById("registerEmail")
+        .value.trim();
+
+    const facility=
+        document.getElementById("registerFacility")
+        .value.trim();
+
+    const role=
+        document.getElementById("registerRole")
+        .value;
+
+    const password=
+        document.getElementById("registerPassword")
+        .value;
+
+
+    if(!name || !email || !facility || !password){
+
+        toast("Please complete all account details.");
+
+        return;
+    }
+
+
+    currentUser={
+        name:name,
+        email:email,
+        facility:facility,
+        role:role
+    };
+
+
+    enterApplication();
+
+    toast("MediSafe account created successfully.");
+
+}
+
+
+function loginUser(){
+
+    const email=
+        document.getElementById("loginEmail")
+        .value.trim();
+
+    const password=
+        document.getElementById("loginPassword")
+        .value;
+
+    const role=
+        document.getElementById("loginRole")
+        .value;
+
+
+    if(!email || !password){
+
+        toast("Please enter email and password.");
+
+        return;
+    }
+
+
+    currentUser={
+        name:email.split("@")[0],
+        email:email,
+        facility:"MediSafe Facility",
+        role:role
+    };
+
+
+    enterApplication();
+
+    toast("Login successful.");
+
+}
+
+
+function enterApplication(){
+
+    document.getElementById("authScreen")
+        .style.display="none";
+
+    document.getElementById("publicWebsite")
+        .style.display="none";
+
+    document.getElementById("app")
+        .style.display="block";
+
+
+    document.getElementById("userName")
+        .textContent=currentUser.name;
+
+    document.getElementById("userEmail")
+        .textContent=currentUser.email;
+
+    document.getElementById("userFacility")
+        .textContent=currentUser.facility;
+
+    document.getElementById("userRole")
+        .textContent=currentUser.role;
+
+
+    document.getElementById("facilityName")
+        .value=currentUser.facility;
+
+}
+
+
+function logout(){
+
+    document.getElementById("app")
+        .style.display="none";
+
+    document.getElementById("publicWebsite")
+        .style.display="block";
+
+    toast("Logged out successfully.");
+
+}
+
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+
+const pageTitles={
+
+    dashboard:"Dashboard",
+    facility:"Facility Details",
+    aboutApp:"About MediSafe",
+
+    wasteEntry:"Waste Entry",
+    report:"Generated Report",
+    colorGuide:"4-Color Guide",
+    aiCheck:"AI Waste Check",
+    goodWork:"Good Work",
+    quiz:"Waste Quiz",
+    rewards:"Rewards",
+
+    summary:"Waste Summary",
+    pickup:"Pickup / GPS",
+    barcode:"Barcode / QR",
+
+    admin:"Admin Management",
+    safety:"Staff Safety",
+    partners:"Medical Partners"
+};
+
+
+function openPage(id,element){
+
+    document.querySelectorAll(".page")
+        .forEach(page=>{
+            page.classList.remove("active");
+        });
+
+
+    const page=
+        document.getElementById(id);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+
+    document.querySelectorAll(".menu")
+        .forEach(item=>{
+            item.classList.remove("active");
+        });
+
+
+    if(element){
+        element.classList.add("active");
+    }
+
+
+    document.getElementById("pageTitle")
+        .textContent=pageTitles[id] || "MediSafe";
+
+}
+
+
+function openPageById(id){
+
+    document.querySelectorAll(".page")
+        .forEach(page=>{
+            page.classList.remove("active");
+        });
+
+    document.getElementById(id)
+        .classList.add("active");
+
+    document.getElementById("pageTitle")
+        .textContent=pageTitles[id] || "MediSafe";
+
+}
+
+
+/* ============================================================
+   FACILITY
+============================================================ */
+
+function saveFacility(){
+
+    const name=
+        document.getElementById("facilityName")
+        .value.trim();
+
+    if(!name){
+
+        toast("Enter the facility name.");
+
+        return;
+    }
+
+
+    currentUser.facility=name;
+
+    document.getElementById("userFacility")
+        .textContent=name;
+
+    toast("Facility details saved.");
+
+}
+
+
+/* ============================================================
+   WASTE ANALYSIS
+============================================================ */
+
+function generateAnalysis(){
+
+    waste.yellow=
+        Number(document.getElementById("yellowKg").value)||0;
+
+    waste.red=
+        Number(document.getElementById("redKg").value)||0;
+
+    waste.white=
+        Number(document.getElementById("whiteKg").value)||0;
+
+    waste.blue=
+        Number(document.getElementById("blueKg").value)||0;
+
+    waste.bags=
+        Number(document.getElementById("bagCount").value)||0;
+
+    waste.storage=
+        Number(document.getElementById("storageHours").value)||0;
+
+
+    const total=
+        waste.yellow+
+        waste.red+
+        waste.white+
+        waste.blue;
+
+
+    if(total<=0){
+
+        toast("Please enter at least one waste quantity.");
+
+        return;
+    }
+
+
+    let score=95;
+
+
+    if(waste.storage>48){
+
+        score-=20;
+
+    }else if(waste.storage>36){
+
+        score-=10;
+    }
+
+
+    if(waste.bags>=20){
+
+        score-=5;
+    }
+
+
+    score=Math.max(0,score);
+
+
+    const nextDay=
+        Math.round(total*1.05*10)/10;
+
+
+    const weekly=
+        Math.round(total*7*10)/10;
+
+
+    let recommendation;
+
+
+    if(waste.storage>=48){
+
+        recommendation=
+            "Review pickup immediately according to the facility's approved biomedical-waste procedure.";
+
+    }else if(waste.bags>=20){
+
+        recommendation=
+            "A higher collection load has been recorded. Review the pickup schedule and continue monitoring.";
+
+    }else{
+
+        recommendation=
+            "Continue source segregation, daily recording and routine pickup monitoring.";
+    }
+
+
+    document.getElementById("dashboardTotal")
+        .textContent=total+" kg";
+
+    document.getElementById("dashboardScore")
+        .textContent=score+"%";
+
+    document.getElementById("dashboardBags")
+        .textContent=waste.bags;
+
+    document.getElementById("yellowDisplay")
+        .textContent=waste.yellow+" kg";
+
+    document.getElementById("redDisplay")
+        .textContent=waste.red+" kg";
+
+    document.getElementById("whiteDisplay")
+        .textContent=waste.white+" kg";
+
+    document.getElementById("blueDisplay")
+        .textContent=waste.blue+" kg";
+
+
+    setBar("yellowBar",waste.yellow,total);
+
+    setBar("redBar",waste.red,total);
+
+    setBar("whiteBar",waste.white,total);
+
+    setBar("blueBar",waste.blue,total);
+
+
+    document.getElementById("dashboardRecommendation")
+        .textContent=recommendation;
+
+
+    document.getElementById("summaryToday")
+        .textContent=total+" kg";
+
+    document.getElementById("summaryWeek")
+        .textContent=weekly+" kg";
+
+    document.getElementById("summaryNext")
+        .textContent=nextDay+" kg";
+
+
+    document.getElementById("sumYellow")
+        .textContent=waste.yellow+" kg";
+
+    document.getElementById("sumRed")
+        .textContent=waste.red+" kg";
+
+    document.getElementById("sumWhite")
+        .textContent=waste.white+" kg";
+
+    document.getElementById("sumBlue")
+        .textContent=waste.blue+" kg";
+
+
+    document.getElementById("adminWaste")
+        .textContent=total+" kg";
+
+    document.getElementById("adminBags")
+        .textContent=waste.bags;
+
+    document.getElementById("adminPoints")
+        .textContent=points;
+
+    document.getElementById("adminTableWaste")
+        .textContent=total+" kg";
+
+
+    document.getElementById("reportContent")
+        .innerHTML=`
+
+        <div class="stats">
+
+            <div class="stat">
+                <small>Total Waste</small>
+                <h2>${total} kg</h2>
+            </div>
+
+            <div class="stat">
+                <small>Segregation Score</small>
+                <h2 class="green-text">${score}%</h2>
+            </div>
+
+            <div class="stat">
+                <small>Next-Day Estimate</small>
+                <h2>${nextDay} kg</h2>
+            </div>
+
+            <div class="stat">
+                <small>Weekly Estimate</small>
+                <h2>${weekly} kg</h2>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Waste Breakdown</h3>
+
+            <br>
+
+            <p>🟡 Yellow: <strong>${waste.yellow} kg</strong></p>
+            <p>🔴 Red: <strong>${waste.red} kg</strong></p>
+            <p>⚪ White: <strong>${waste.white} kg</strong></p>
+            <p>🔵 Blue: <strong>${waste.blue} kg</strong></p>
+
+            <br>
+
+            <p>
+                <strong>Bags:</strong> ${waste.bags}
+            </p>
+
+            <p>
+                <strong>Storage hours entered:</strong>
+                ${waste.storage}
+            </p>
+
+            <br>
+
+            <h3>Recommendation</h3>
+
+            <br>
+
+            <p class="muted">
+                ${recommendation}
+            </p>
+
+            <br>
+
+            <small class="muted">
+                This prototype analysis uses user-entered data.
+                It is not a substitute for healthcare regulations,
+                clinical judgement or facility SOPs.
+            </small>
+
+        </div>
+    `;
+
+
+    toast("Waste analysis generated.");
+
+}
+
+
+function setBar(id,value,total){
+
+    document.getElementById(id)
+        .style.width=
+        ((value/total)*100)+"%";
+
+}
+
+
+/* ============================================================
+   AI WASTE CHECK
+============================================================ */
+
+function checkWasteAI(){
+
+    const file=
+        document.getElementById("aiImage")
+        .files[0];
+
+    if(!file){
+
+        toast("Upload an image first.");
+
+        return;
+    }
+
+
+    let category="Review Required";
+
+    let explanation=
+        "The prototype cannot confidently determine the waste category. Verify the item using your approved facility guide.";
+
+
+    const name=
+        file.name.toLowerCase();
+
+
+    if(
+        name.includes("needle") ||
+        name.includes("blade") ||
+        name.includes("scalpel") ||
+        name.includes("sharp")
+    ){
+
+        category="⚪ White — Sharps";
+
+        explanation=
+            "The filename suggests a sharps-related item. Verify before disposal.";
+
+    }else if(
+        name.includes("glove") ||
+        name.includes("tube") ||
+        name.includes("catheter") ||
+        name.includes("plastic")
+    ){
+
+        category="🔴 Red — Contaminated Plastic";
+
+        explanation=
+            "The filename suggests a contaminated plastic item. Verify against the approved category.";
+
+    }else if(
+        name.includes("vial") ||
+        name.includes("ampoule") ||
+        name.includes("glass")
+    ){
+
+        category="🔵 Blue — Glass";
+
+        explanation=
+            "The filename suggests glassware. Verify the item before disposal.";
+
+    }else if(
+        name.includes("cotton") ||
+        name.includes("bandage") ||
+        name.includes("blood") ||
+        name.includes("medicine")
+    ){
+
+        category="🟡 Yellow — Applicable Waste";
+
+        explanation=
+            "The filename suggests soiled or pharmaceutical-related waste. Verify the exact category.";
+    }
+
+
+    const box=
+        document.getElementById("aiResult");
+
+    box.style.display="block";
+
+    box.innerHTML=`
+
+        <div class="verify-title"
+             style="color:var(--green)">
+            AI-Assisted Suggestion: ${category}
+        </div>
+
+        <p class="muted">
+            ${explanation}
+        </p>
+
+        <br>
+
+        <small class="muted">
+            This is a frontend demonstration. A production
+            version would use a validated computer-vision model
+            and human verification.
+        </small>
+    `;
+
+
+    toast("AI-assisted check completed.");
+
+}
+
+
+/* ============================================================
+   GOOD WORK PREVIEW
+============================================================ */
+
+function previewGoodWork(){
+
+    const input=
+        document.getElementById("goodWorkFile");
+
+    const file=input.files[0];
+
+    const preview=
+        document.getElementById("goodPreview");
+
+
+    preview.innerHTML="";
+
+
+    if(!file){
+
+        preview.style.display="none";
+
+        return;
+    }
+
+
+    if(file.size>50*1024*1024){
+
+        toast("File must be below 50 MB.");
+
+        input.value="";
+
+        return;
+    }
+
+
+    preview.style.display="block";
+
+
+    const url=
+        URL.createObjectURL(file);
+
+
+    if(file.type.startsWith("image/")){
+
+        preview.innerHTML=`
+
+            <p>
+                <strong>Photo Preview</strong>
+            </p>
+
+            <br>
+
+            <img src="${url}">
+        `;
+
+    }else if(file.type.startsWith("video/")){
+
+        preview.innerHTML=`
+
+            <p>
+                <strong>Video Preview</strong>
+            </p>
+
+            <br>
+
+            <video controls>
+                <source src="${url}">
+            </video>
+        `;
+
+    }else{
+
+        preview.innerHTML=
+            "<p>Selected: "+file.name+"</p>";
+    }
+
+}
+
+
+/* ============================================================
+   GOOD WORK SUBMISSION
+============================================================ */
+
+function submitGoodWork(){
+
+    const file=
+        document.getElementById("goodWorkFile")
+        .files[0];
+
+    const name=
+        document.getElementById("goodStaffName")
+        .value.trim();
+
+    const category=
+        document.getElementById("goodCategory")
+        .value;
+
+    const description=
+        document.getElementById("goodDescription")
+        .value.trim();
+
+
+    if(!file){
+
+        toast("Please upload a photo or video.");
+
+        return;
+    }
+
+
+    if(!name){
+
+        toast("Please enter your name.");
+
+        return;
+    }
+
+
+    if(!category){
+
+        toast("Please select the waste category.");
+
+        return;
+    }
+
+
+    if(!description){
+
+        toast("Please describe the good work.");
+
+        return;
+    }
+
+
+    const id=
+        "MS-"+Math.floor(100000+Math.random()*900000);
+
+
+    const box=
+        document.getElementById("goodVerification");
+
+    box.style.display="block";
+
+
+    document.getElementById("goodStatus")
+        .textContent=
+        "🔎 AI-Assisted Verification in Progress";
+
+
+    document.getElementById("goodMessage")
+        .textContent=
+        "Your photo/video has been recorded. In a production system, the evidence would be checked by a validated AI service and/or authorized hospital supervisor.";
+
+
+    document.getElementById("goodReward")
+        .textContent=
+        "Submission ID: "+id;
+
+
+    setTimeout(()=>{
+
+        document.getElementById("goodStatus")
+            .textContent=
+            "🟡 Submitted — Reward Pending Verification";
+
+
+        document.getElementById("goodMessage")
+            .textContent=
+            "The submission has been accepted for review. Points are not automatically approved just because a file was uploaded.";
+
+
+        document.getElementById("goodReward")
+            .textContent=
+            "+50 MediSafe Points after approval";
+
+
+        submissions.unshift({
+
+            id:id,
+
+            category:category,
+
+            date:new Date().toLocaleString(),
+
+            status:"Pending Verification",
+
+            points:50
+
+        });
+
+
+        updateHistory();
+
+        toast("Good Work submitted.");
+
+    },1000);
+
+}
+
+
+/* ============================================================
+   HISTORY
+============================================================ */
+
+function updateHistory(){
+
+    const body=
+        document.getElementById("historyBody");
+
+
+    if(submissions.length===0){
+
+        body.innerHTML=`
+
+            <tr>
+                <td colspan="5">
+                    No submissions yet.
+                </td>
+            </tr>
+
+        `;
+
+        return;
+    }
+
+
+    body.innerHTML=
+        submissions.map(item=>`
+
+        <tr>
+
+            <td>
+                ${item.id}
+            </td>
+
+            <td>
+                ${item.category}
+            </td>
+
+            <td>
+                ${item.date}
+            </td>
+
+            <td>
+                <span class="badge badge-pending">
+                    ${item.status}
+                </span>
+            </td>
+
+            <td>
+                +${item.points}
+            </td>
+
+        </tr>
+
+    `).join("");
+
+}
+
+
+/* ============================================================
+   REWARDS
+============================================================ */
+
+function redeem(cost,name){
+
+    if(points<cost){
+
+        toast(
+            "You need "+cost+" points to redeem "+name+"."
+        );
+
+        return;
+    }
+
+
+    points-=cost;
+
+    updatePoints();
+
+    toast(name+" redeemed successfully.");
+
+}
+
+
+function updatePoints(){
+
+    document.getElementById("rewardPoints")
+        .textContent=points;
+
+    document.getElementById("dashboardPoints")
+        .textContent=points;
+
+    document.getElementById("adminPoints")
+        .textContent=points;
+
+}
+
+
+/* ============================================================
+   QUIZ
+============================================================ */
+
+function submitQuiz(){
+
+    let score=0;
+
+
+    const q1=
+        document.querySelector(
+            'input[name="q1"]:checked'
+        );
+
+    const q2=
+        document.querySelector(
+            'input[name="q2"]:checked'
+        );
+
+    const q3=
+        document.querySelector(
+            'input[name="q3"]:checked'
+        );
+
+
+    if(q1 && q1.value==="White")
+        score++;
+
+    if(q2 && q2.value==="Blue")
+        score++;
+
+    if(q3 && q3.value==="Red")
+        score++;
+
+
+    if(!q1 || !q2 || !q3){
+
+        toast("Please answer all questions.");
+
+        return;
+    }
+
+
+    const result=
+        document.getElementById("quizResult");
+
+    result.classList.remove("hidden");
+
+    result.textContent=
+        "Quiz Score: "+score+"/3";
+
+
+    if(score===3){
+
+        points+=20;
+
+        updatePoints();
+
+        toast("+20 MediSafe Points earned!");
+
+    }else{
+
+        toast("Quiz completed. Review the 4-Color Guide.");
+
+    }
+
+}
+
+
+/* ============================================================
+   PICKUP
+============================================================ */
+
+function requestPickup(){
+
+    const location=
+        document.getElementById("pickupLocation")
+        .value.trim();
+
+    const bags=
+        Number(
+            document.getElementById("pickupBags").value
+        )||0;
+
+    const priority=
+        document.getElementById("pickupPriority")
+        .value;
+
+
+    if(!location || bags<=0){
+
+        toast("Enter pickup location and bag count.");
+
+        return;
+    }
+
+
+    pickupCount++;
+
+
+    document.getElementById("pickupStatus")
+        .textContent=
+        "Pickup requested for "+bags+
+        " bag(s) from "+location+
+        ". Priority: "+priority+".";
+
+
+    document.getElementById("adminPickups")
+        .textContent=pickupCount;
+
+
+    toast("Pickup request created.");
+
+}
+
+
+/* ============================================================
+   QR TRACKING
+============================================================ */
+
+function trackBag(){
+
+    const id=
+        document.getElementById("qrBagId")
+        .value.trim();
+
+
+    if(!id){
+
+        toast("Enter a bag ID.");
+
+        return;
+    }
+
+
+    document.getElementById("qrResult")
+        .innerHTML=`
+
+        <div class="card"
+             style="background:#f4faf7">
+
+            <h3>
+                Bag ${id}
+            </h3>
+
+            <br>
+
+            <p>
+                🟢 Source Segregation — Recorded
+            </p>
+
+            <p>
+                🟢 QR / Barcode — Active
+            </p>
+
+            <p>
+                🟡 Pickup — Awaiting Collection
+            </p>
+
+            <p>
+                ⚪ Final Treatment — Pending
+            </p>
+
+            <br>
+
+            <small class="muted">
+                Demonstration tracking record. A real deployment
+                can connect this workflow to an authorized database,
+                QR scanner and collection system.
+            </small>
+
+        </div>
+    `;
+
+
+    toast("Bag tracking information loaded.");
+
+}
+
+
+/* ============================================================
+   PARTNERS
+============================================================ */
+
+function partner(name){
+
+    toast(
+        "Medical partner enquiry created for "+name+"."
+    );
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+function toast(message){
+
+    const box=
+        document.getElementById("toast");
+
+    box.textContent=message;
+
+    box.style.display="block";
+
+
+    setTimeout(()=>{
+
+        box.style.display="none";
+
+    },3000);
+
+}
+
+
+/* ============================================================
+   INITIALIZATION
+============================================================ */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    updateHistory();
+
+    updatePoints();
+
+});
+
+</script>
+
+</body>
+</html>
